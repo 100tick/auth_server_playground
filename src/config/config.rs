@@ -97,7 +97,8 @@ mod tests {
         let path = Config::config_dir_path();
         println!("{}", path);
         assert_eq!(
-            "/Users/undervars/My Drive/dev/underair/server_rs/src/config",
+            // NEED TO MODIFY
+            "",
             path
         );
     }
@@ -121,16 +122,19 @@ mod tests {
         assert_eq!(c.server.port, 4000);
         assert_eq!(
             c.google_oauth.client_id,
-            "775415266610-insjflo30jv4iunv9dmqu98pnp2tqnfv.apps.googleusercontent.com"
+            "",
+            // NEED TO MODIFY
         );
-        assert_eq!(c.google_oauth.client_secret, "lOdZD97VRgJj-KBe2INp85oX");
+        assert_eq!(c.google_oauth.client_secret, "");             // NEED TO MODIFY
         assert_eq!(
             c.google_oauth.login_redirect_url,
-            "http://localhost:4000/auth/google/login/redirect"
+            // NEED TO MODIFY
+            "",
         );
         assert_eq!(
             c.google_oauth.create_user_redirect_url,
-            "http://localhost:4000/auth/google/create_user/redirect"
+            // NEED TO MODIFY
+            "",
         );
         assert_eq!(c.auth.jwt_secret, "secret");
         assert_eq!(c.auth.cookie_secret, "secret");
