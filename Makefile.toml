@@ -1,0 +1,92 @@
+#############################################
+#                  EXTEND                   #
+#############################################
+extend = [
+  # { path = "migration/Makefile.toml" },
+  # { path = "entity/Makefile.toml" },
+]
+#############################################
+#                  CONFIG                   #
+#############################################
+[config]
+default_to_workspace = false
+
+#############################################
+#                   ENV                     #
+#############################################
+[env]
+DATABASE_URL = "postgres://root:112344@localhost:5432/auth"
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+DB_MIGRATION_PATH = "migration"
+# ENTITY_PATH = "entity/src"
+# DIESEL_CONFIG_PATH = "migration/diesel.toml"
+# [tasks.gen_migrate]
+# script = ["sea-orm-cli migrate generate -d ${MIGRATION_DIR} $1"]
+# dependencies = ["mkdir_migration_if_not_exists"]
+
+# [tasks.gen_entity]
+# script = ["sea-orm-cli generate entity -o ${ENTITY_DIR}"]
+#############################################
+#                  SQLX                     #
+#############################################
+[tasks.add_migration]
+script = [
+  "sqlx migrate add -r --source $DB_MIGRATION_PATH $1"
+]
+
+[tasks.migrate_up]
+script = [
+  "sqlx migrate run -D $DATABASE_URL --source $DB_MIGRATION_PATH"
+]
+[tasks.migrate_down]
+script = [
+  "sqlx migrate revert -D $DATABASE_URL --source $DB_MIGRATION_PATH"
+]
+#############################################
+#                 DIESEL                    #
+#############################################
+# [tasks.gen_migration]
+# script = [
+#   "diesel migration generate $1"
+# ]
+
+# [tasks.migrate_up]
+# script = [
+#   "diesel migration run --database-url $DATABASE_URL --migration-dir $MIGRATION_DIR"
+# ]
+# [tasks.migrate_down]
+# script = [
+#   "diesel migration revert --database-url $DATABASE_URL --migration-dir $MIGRATION_DIR"
+# ]
+
+# [tasks.gen_schema]
+# script = [
+#   "diesel"
+# ]
+#############################################
+#                  TASKS                    #
+#############################################
+# [tasks.gen_migration]
+# script = [
+#   "sea-orm-cli migrate generate -d $MIGRATION_PATH $1",
+# ]
+
+# [tasks.gen_entity]
+# script = [
+#   "sea-orm-cli generate entity -o $ENTITY_PATH -u $DATABASE_URL --tables $1 --with-serde both",
+# ]
+
+[tasks.gen_all_entities]
+script = [
+  "sea-orm-cli generate entity -o $ENTITY_PATH -u $DATABASE_URL --with-serde both",
+]
+
+[tasks.dev]
+script = ["ENV=dev cargo run"]
+
+[tasks.build]
+script = ["ENV=prod cargo build"]
+
+[tasks.entity]
+args = ["@@remove-empty(DOES_NOT_EXIST)", "1"]
+script = ["sea-orm-cli generate entity -o ${MODEL_PATH}"]

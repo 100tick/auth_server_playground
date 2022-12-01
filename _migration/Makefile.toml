@@ -1,0 +1,8 @@
+# [tasks.gen_migrate]
+# script = ["sea-orm-cli migrate generate $1"]
+
+# [tasks.migrate_up]
+# script = ["sea-orm-cli migrate up -n $1"]
+
+# [tasks.migrate_down]
+# script = ["sea-orm-cli migrate down -n $1"]

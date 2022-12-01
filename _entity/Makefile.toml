@@ -1,0 +1,4 @@
+# [tasks.gen_entity]
+# script = [
+#   "sea-orm-cli generate entity -o ${ENTITY_PATH} -u --tables $1 --with-serde both",
+# ]

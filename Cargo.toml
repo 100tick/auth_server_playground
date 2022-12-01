@@ -1,0 +1,48 @@
+[package]
+name = "auth_server"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace]
+# members = [".", "entity", "migration"]
+
+[dependencies]
+# entity = { path = "entity" }
+# migration = { path ="migration" }
+# diesel = { version = "2.0.0-rc.0", features = ["postgres", "r2d2", "uuid", "chrono"] }
+tracing = "0.1.34"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tokio = { version = "1.18.0", features = ["full"] }
+axum = { version = "0.5.6", features = ["serde_json","headers"] }
+axum-extra={version="0.3.6",features=["cookie-signed","typed-routing"]}
+dotenv = "0.15.0"
+chrono = { version = "0.4.19", features = ["serde"] }
+# uuid = { version = "1.0", features = ["v4", "serde"] }
+serde = { version = "1.0.137", features = ["derive"] }
+serde_json = "1.0.81"
+reqwest = { version = "0.11.10", features = ["json"] }
+# anyhow = "1.0.58"
+jsonwebtoken = "8.1.1"
+paseto = "2.0.2+1.0.3"
+
+sqlx = { version = "0.6.0", features = [
+  "runtime-tokio-rustls",
+  "postgres",
+  "chrono",
+  "json",
+#   "uuid",
+] }
+rand = "0.8.5"
+time = "0.3.11"
+thiserror = "1.0.31"
+once_cell = "1.13.0"
+# sea-orm = {version="0.8.0", features=[
+#     "debug-print",
+#     "runtime-tokio-native-tls",
+#     "sqlx-postgres",]}
+toml = "0.5.9"
+validator = { version = "0.15.0", features = ["derive"] }
+
+[dev-dependencies]
+env_logger = "0.9.0"
