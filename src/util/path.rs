@@ -12,7 +12,8 @@ pub fn project_root() -> String {
 
 #[test]
 fn test_project_root() {
-    let current_project_root = "/Users/undervars/My Drive/dev/underair/server_rs";
+    //
+    let current_project_root = "_";
 
     let root = project_root();
 
